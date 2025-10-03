@@ -587,15 +587,16 @@
         import { getDatabase, ref, onValue, update, push, set } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
 
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
 
+              apiKey: "AIzaSyA8N57hbaclQEmLbzFQ4uinHAo4LXSrj-M",
+              authDomain: "food-huger.firebaseapp.com",
+              databaseURL: "https://food-huger-default-rtdb.firebaseio.com",
+              projectId: "food-huger",
+              storageBucket: "food-huger.firebasestorage.app",
+              messagingSenderId: "527900985953",
+              appId: "1:527900985953:web:b1b11e76e88790e2fcf820",
+              measurementId: "G-MBQE71PJ3B"
+};
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getDatabase(app);
