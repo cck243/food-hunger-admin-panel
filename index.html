@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunger Food - Admin Panel</title>
     <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --border-color: #e0e0e0;
+            --text-dark: #333;
+            --text-light: #666;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,8 +28,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
+            color: var(--text-dark);
         }
 
         .login-container {
@@ -29,9 +45,21 @@
             background: white;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-lg);
             width: 100%;
             max-width: 400px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .logo {
@@ -40,13 +68,13 @@
         }
 
         .logo h1 {
-            color: #667eea;
+            color: var(--primary-color);
             font-size: 32px;
             margin-bottom: 5px;
         }
 
         .logo p {
-            color: #666;
+            color: var(--text-light);
             font-size: 14px;
         }
 
@@ -57,53 +85,92 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: var(--text-dark);
             font-weight: 500;
         }
 
         .form-group input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 14px;
-            transition: border 0.3s;
+            transition: all 0.3s;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
         .btn {
-            width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
             border: none;
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn:hover {
             transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: var(--dark-color);
+        }
+
+        .btn-danger {
+            background: var(--danger-color);
         }
 
         .error {
             background: #fee;
-            color: #c33;
+            color: var(--danger-color);
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 20px;
             font-size: 14px;
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .success {
+            background: #efe;
+            color: var(--success-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid var(--success-color);
         }
 
         .dashboard {
@@ -118,14 +185,14 @@
             position: fixed;
             left: 0;
             top: 0;
-            width: 250px;
+            width: 280px;
             height: 100vh;
             background: white;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             padding: 20px 0;
             overflow-y: auto;
             z-index: 100;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
 
         .sidebar.mobile-hidden {
@@ -133,77 +200,101 @@
         }
 
         .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 0 25px 25px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
         }
 
         .sidebar-header h2 {
-            color: #667eea;
+            color: var(--primary-color);
             font-size: 24px;
+            margin-bottom: 5px;
         }
 
         .sidebar-header p {
-            color: #666;
+            color: var(--text-light);
             font-size: 12px;
-            margin-top: 5px;
         }
 
         .menu-item {
-            padding: 15px 20px;
-            color: #333;
+            padding: 15px 25px;
+            color: var(--text-dark);
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            border-left: 4px solid transparent;
         }
 
         .menu-item:hover {
-            background: #f5f5f5;
+            background: var(--light-color);
+            color: var(--primary-color);
         }
 
         .menu-item.active {
-            background: #667eea;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
-            border-left: 4px solid #764ba2;
+            border-left-color: var(--secondary-color);
+        }
+
+        .menu-item-icon {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
         }
 
         .main-content {
-            margin-left: 250px;
-            padding: 20px;
+            margin-left: 280px;
+            padding: 25px;
             min-height: 100vh;
+            background: #f5f7fa;
+            transition: margin-left 0.3s ease;
         }
 
         .header {
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .header h1 {
-            color: #333;
+            color: var(--text-dark);
             font-size: 24px;
+            font-weight: 600;
         }
 
         .logout-btn {
             padding: 10px 20px;
-            background: #ff4757;
+            background: var(--danger-color);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+            transform: translateY(-1px);
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 30px;
         }
 
@@ -211,29 +302,50 @@
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
         }
 
         .stat-card h3 {
-            color: #666;
+            color: var(--text-light);
             font-size: 14px;
             margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-card .value {
-            color: #333;
+            color: var(--text-dark);
             font-size: 32px;
             font-weight: 700;
+            margin-bottom: 5px;
         }
 
         .stat-card .label {
-            color: #667eea;
+            color: var(--primary-color);
             font-size: 12px;
-            margin-top: 5px;
+            font-weight: 500;
         }
 
         .content-section {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
 
         .content-section.active {
@@ -244,39 +356,57 @@
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
         }
 
         .card h2 {
-            color: #333;
+            color: var(--text-dark);
             margin-bottom: 20px;
             font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 15px;
         }
 
         table th {
-            background: #f5f5f5;
-            padding: 12px;
+            background: var(--light-color);
+            padding: 15px;
             text-align: left;
             font-weight: 600;
-            color: #333;
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--border-color);
         }
 
         table td {
-            padding: 12px;
-            border-bottom: 1px solid #e0e0e0;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+
+        table tr:hover td {
+            background: #f8f9fa;
         }
 
         .badge {
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .badge.pending {
@@ -294,28 +424,44 @@
             color: #721c24;
         }
 
+        .badge.delivered {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .badge.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
         .action-btn {
-            padding: 6px 12px;
+            padding: 8px 12px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
             margin-right: 5px;
         }
 
+        .action-btn:hover {
+            transform: translateY(-1px);
+        }
+
         .approve-btn {
-            background: #28a745;
+            background: var(--success-color);
             color: white;
         }
 
         .reject-btn {
-            background: #dc3545;
+            background: var(--danger-color);
             color: white;
         }
 
         .cancel-btn {
-            background: #ffc107;
-            color: #333;
+            background: var(--warning-color);
+            color: var(--dark-color);
         }
 
         .notification-form {
@@ -327,26 +473,37 @@
         .notification-form input {
             flex: 1;
             padding: 12px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
+            font-size: 14px;
         }
 
         .notification-form button {
             padding: 12px 24px;
-            background: #667eea;
+            background: var(--primary-color);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .notification-form button:hover {
+            background: var(--secondary-color);
         }
 
         .notification-item {
-            background: #f8f9fa;
+            background: var(--light-color);
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 10px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .notification-item:hover {
+            transform: translateX(5px);
         }
 
         .mobile-menu-btn {
@@ -360,12 +517,104 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--light-color);
+        }
+
+        .search-box {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            height: 400px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 250px;
+            }
         }
 
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
+                width: 280px;
             }
 
             .sidebar.mobile-visible {
@@ -374,6 +623,7 @@
 
             .main-content {
                 margin-left: 0;
+                padding: 15px;
             }
 
             .mobile-menu-btn {
@@ -382,7 +632,8 @@
 
             .header {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
+                text-align: center;
             }
 
             .stats-grid {
@@ -394,7 +645,25 @@
             }
 
             table th, table td {
-                padding: 8px;
+                padding: 10px 8px;
+            }
+
+            .notification-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-box {
+                padding: 30px 20px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .stat-card {
+                padding: 20px;
             }
         }
     </style>
@@ -407,16 +676,20 @@
                 <p>Admin Panel</p>
             </div>
             <div id="errorMessage" class="error" style="display: none;"></div>
+            <div id="successMessage" class="success" style="display: none;"></div>
             <form id="loginForm">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" placeholder="admin@hungerfood.com" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="password" required>
+                    <input type="password" id="password" placeholder="Enter your password" required>
                 </div>
-                <button type="submit" class="btn" id="loginBtn">Login</button>
+                <button type="submit" class="btn btn-full" id="loginBtn">
+                    <span id="loginText">Login</span>
+                    <div id="loginSpinner" class="loading" style="display: none;"></div>
+                </button>
             </form>
         </div>
     </div>
@@ -429,19 +702,43 @@
                 <h2>Hunger Food</h2>
                 <p>Admin Dashboard</p>
             </div>
-            <div class="menu-item active" data-section="overview">📊 Overview</div>
-            <div class="menu-item" data-section="restaurants">🏪 Restaurants</div>
-            <div class="menu-item" data-section="delivery">🚴 Delivery Partners</div>
-            <div class="menu-item" data-section="customers">👥 Customers</div>
-            <div class="menu-item" data-section="orders">📦 Orders</div>
-            <div class="menu-item" data-section="notifications">🔔 Notifications</div>
-            <div class="menu-item" data-section="reports">📈 Reports</div>
+            <div class="menu-item active" data-section="overview">
+                <span class="menu-item-icon">📊</span>
+                <span>Overview</span>
+            </div>
+            <div class="menu-item" data-section="restaurants">
+                <span class="menu-item-icon">🏪</span>
+                <span>Restaurants</span>
+            </div>
+            <div class="menu-item" data-section="delivery">
+                <span class="menu-item-icon">🚴</span>
+                <span>Delivery Partners</span>
+            </div>
+            <div class="menu-item" data-section="customers">
+                <span class="menu-item-icon">👥</span>
+                <span>Customers</span>
+            </div>
+            <div class="menu-item" data-section="orders">
+                <span class="menu-item-icon">📦</span>
+                <span>Orders</span>
+            </div>
+            <div class="menu-item" data-section="notifications">
+                <span class="menu-item-icon">🔔</span>
+                <span>Notifications</span>
+            </div>
+            <div class="menu-item" data-section="reports">
+                <span class="menu-item-icon">📈</span>
+                <span>Reports</span>
+            </div>
         </div>
 
         <div class="main-content">
             <div class="header">
-                <h1>Admin Dashboard</h1>
-                <button class="logout-btn" id="logoutBtn">Logout</button>
+                <h1 id="pageTitle">Admin Dashboard</h1>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span id="currentTime" style="color: var(--text-light); font-size: 14px;"></span>
+                    <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
+                </div>
             </div>
 
             <div id="overviewSection" class="content-section active">
@@ -471,18 +768,25 @@
                         <div class="value" id="totalRevenue">₹0</div>
                         <div class="label">Total earnings</div>
                     </div>
+                    <div class="stat-card">
+                        <h3>Pending Approvals</h3>
+                        <div class="value" id="pendingApprovals">0</div>
+                        <div class="label">Requires action</div>
+                    </div>
                 </div>
             </div>
 
             <div id="restaurantsSection" class="content-section">
                 <div class="card">
-                    <h2>Restaurant Management</h2>
+                    <h2>🏪 Restaurant Management</h2>
+                    <input type="text" class="search-box" id="restaurantSearch" placeholder="🔍 Search restaurants...">
                     <table id="restaurantsTable">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Cuisine</th>
+                                <th>Contact</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -494,7 +798,8 @@
 
             <div id="deliverySection" class="content-section">
                 <div class="card">
-                    <h2>Delivery Partner Management</h2>
+                    <h2>🚴 Delivery Partner Management</h2>
+                    <input type="text" class="search-box" id="deliverySearch" placeholder="🔍 Search delivery partners...">
                     <table id="deliveryTable">
                         <thead>
                             <tr>
@@ -513,7 +818,8 @@
 
             <div id="customersSection" class="content-section">
                 <div class="card">
-                    <h2>Customer List</h2>
+                    <h2>👥 Customer List</h2>
+                    <input type="text" class="search-box" id="customerSearch" placeholder="🔍 Search customers...">
                     <table id="customersTable">
                         <thead>
                             <tr>
@@ -521,6 +827,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Address</th>
+                                <th>Orders</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -530,7 +837,8 @@
 
             <div id="ordersSection" class="content-section">
                 <div class="card">
-                    <h2>Order Management</h2>
+                    <h2>📦 Order Management</h2>
+                    <input type="text" class="search-box" id="orderSearch" placeholder="🔍 Search orders...">
                     <table id="ordersTable">
                         <thead>
                             <tr>
@@ -539,6 +847,7 @@
                                 <th>Restaurant</th>
                                 <th>Amount</th>
                                 <th>Status</th>
+                                <th>Date</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -549,96 +858,150 @@
 
             <div id="notificationsSection" class="content-section">
                 <div class="card">
-                    <h2>Send Notification</h2>
+                    <h2>🔔 Send Notification</h2>
                     <div class="notification-form">
-                        <input type="text" id="notificationMessage" placeholder="Enter notification message">
-                        <button onclick="sendNotification()">Send</button>
+                        <input type="text" id="notificationMessage" placeholder="Enter notification message for all users...">
+                        <button onclick="sendNotification()">📤 Send</button>
                     </div>
-                    <h2>Recent Notifications</h2>
+                    <h2>📋 Recent Notifications</h2>
                     <div id="notificationsList"></div>
                 </div>
             </div>
 
             <div id="reportsSection" class="content-section">
                 <div class="card">
-                    <h2>Top Restaurants</h2>
+                    <h2>🏆 Top Restaurants</h2>
                     <table id="topRestaurantsTable">
                         <thead>
                             <tr>
+                                <th>Rank</th>
                                 <th>Restaurant</th>
                                 <th>Total Orders</th>
                                 <th>Total Revenue</th>
+                                <th>Rating</th>
                             </tr>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
                 <div class="card">
-                    <h2>COD Summary</h2>
+                    <h2>💰 COD Summary</h2>
                     <div id="codSummary"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
-        import { getAuth, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
-        import { getDatabase, ref, onValue, update, push, set } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js';
+    <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
+    <script>
+        // Firebase Configuration
         const firebaseConfig = {
+            apiKey: "AIzaSyA8N57hbaclQEmLbzFQ4uinHAo4LXSrj-M",
+            authDomain: "food-huger.firebaseapp.com",
+            databaseURL: "https://food-huger-default-rtdb.firebaseio.com",
+            projectId: "food-huger",
+            storageBucket: "food-huger.firebasestorage.app",
+            messagingSenderId: "527900985953",
+            appId: "1:527900985953:web:b1b11e76e88790e2fcf820",
+            measurementId: "G-MBQE71PJ3B"
+        };
 
-              apiKey: "AIzaSyA8N57hbaclQEmLbzFQ4uinHAo4LXSrj-M",
-              authDomain: "food-huger.firebaseapp.com",
-              databaseURL: "https://food-huger-default-rtdb.firebaseio.com",
-              projectId: "food-huger",
-              storageBucket: "food-huger.firebasestorage.app",
-              messagingSenderId: "527900985953",
-              appId: "1:527900985953:web:b1b11e76e88790e2fcf820",
-              measurementId: "G-MBQE71PJ3B"
-};
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getDatabase(app);
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
 
-        window.auth = auth;
-        window.db = db;
-        window.dbRef = ref;
-        window.dbUpdate = update;
-        window.dbPush = push;
-        window.dbSet = set;
-        window.dbOnValue = onValue;
+        // Global variables
+        let currentUser = null;
+        let allData = {
+            restaurants: {},
+            deliveryPartners: {},
+            customers: {},
+            orders: {}
+        };
 
+        // Utility functions
+        function showMessage(elementId, message, type = 'error') {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = type;
+            element.style.display = 'block';
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        function formatCurrency(amount) {
+            return '₹' + parseFloat(amount).toLocaleString('en-IN');
+        }
+
+        function formatDate(timestamp) {
+            return new Date(timestamp).toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function updateCurrentTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = 
+                now.toLocaleDateString('en-IN', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+        }
+
+        // Initialize current time
+        setInterval(updateCurrentTime, 1000);
+        updateCurrentTime();
+
+        // Authentication
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-            const errorMsg = document.getElementById('errorMessage');
             const loginBtn = document.getElementById('loginBtn');
+            const loginText = document.getElementById('loginText');
+            const loginSpinner = document.getElementById('loginSpinner');
 
-            errorMsg.style.display = 'none';
+            loginText.style.display = 'none';
+            loginSpinner.style.display = 'inline-block';
             loginBtn.disabled = true;
-            loginBtn.textContent = 'Logging in...';
 
             try {
-                await signInWithEmailAndPassword(auth, email, password);
+                await auth.signInWithEmailAndPassword(email, password);
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
                 loadDashboardData();
             } catch (error) {
-                errorMsg.textContent = error.message;
-                errorMsg.style.display = 'block';
+                showMessage('errorMessage', error.message, 'error');
             } finally {
+                loginText.style.display = 'inline';
+                loginSpinner.style.display = 'none';
                 loginBtn.disabled = false;
-                loginBtn.textContent = 'Login';
             }
         });
 
         document.getElementById('logoutBtn').addEventListener('click', async () => {
-            await signOut(auth);
-            location.reload();
+            if (confirm('Are you sure you want to logout?')) {
+                await auth.signOut();
+                location.reload();
+            }
         });
 
+        // Navigation
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('mobile-visible');
         });
@@ -651,129 +1014,198 @@
                 document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
                 document.getElementById(item.dataset.section + 'Section').classList.add('active');
                 
+                // Update page title
+                document.getElementById('pageTitle').textContent = 
+                    item.textContent.trim() + ' - Hunger Food Admin';
+                
                 if (window.innerWidth <= 768) {
                     document.getElementById('sidebar').classList.remove('mobile-visible');
                 }
             });
         });
 
-        function loadDashboardData() {
-            onValue(ref(db, 'orders'), (snapshot) => {
-                const orders = snapshot.val() || {};
-                const orderList = Object.entries(orders);
-                document.getElementById('totalOrders').textContent = orderList.length;
-                
-                const revenue = orderList.reduce((sum, [, order]) => sum + (order.totalAmount || 0), 0);
-                document.getElementById('totalRevenue').textContent = '₹' + revenue.toFixed(2);
-                
-                loadOrders(orders);
-                loadReports(orders);
-            });
-
-            onValue(ref(db, 'restaurants'), (snapshot) => {
-                const restaurants = snapshot.val() || {};
-                const approved = Object.values(restaurants).filter(r => r.approved).length;
-                document.getElementById('totalRestaurants').textContent = approved;
-                loadRestaurants(restaurants);
-            });
-
-            onValue(ref(db, 'deliveryPartners'), (snapshot) => {
-                const partners = snapshot.val() || {};
-                const approved = Object.values(partners).filter(p => p.approved).length;
-                document.getElementById('totalDelivery').textContent = approved;
-                loadDeliveryPartners(partners);
-            });
-
-            onValue(ref(db, 'customers'), (snapshot) => {
-                const customers = snapshot.val() || {};
-                document.getElementById('totalCustomers').textContent = Object.keys(customers).length;
-                loadCustomers(customers);
-            });
-
-            onValue(ref(db, 'admin/notifications'), (snapshot) => {
-                const notifications = snapshot.val() || {};
-                loadNotifications(notifications);
-            });
+        // Search functionality
+        function setupSearch(inputId, tableId, searchFields) {
+            const searchInput = document.getElementById(inputId);
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+                    
+                    rows.forEach(row => {
+                        let found = false;
+                        searchFields.forEach(field => {
+                            const cell = row.cells[field];
+                            if (cell && cell.textContent.toLowerCase().includes(searchTerm)) {
+                                found = true;
+                            }
+                        });
+                        row.style.display = found ? '' : 'none';
+                    });
+                });
+            }
         }
 
-        function loadRestaurants(restaurants) {
+        // Data loading functions
+        function loadDashboardData() {
+            // Load restaurants
+            db.ref('restaurants').on('value', (snapshot) => {
+                allData.restaurants = snapshot.val() || {};
+                updateRestaurantsTable();
+                updateStats();
+            });
+
+            // Load delivery partners
+            db.ref('deliveryPartners').on('value', (snapshot) => {
+                allData.deliveryPartners = snapshot.val() || {};
+                updateDeliveryTable();
+                updateStats();
+            });
+
+            // Load customers
+            db.ref('customers').on('value', (snapshot) => {
+                allData.customers = snapshot.val() || {};
+                updateCustomersTable();
+                updateStats();
+            });
+
+            // Load orders
+            db.ref('orders').on('value', (snapshot) => {
+                allData.orders = snapshot.val() || {};
+                updateOrdersTable();
+                updateStats();
+                updateReports();
+            });
+
+            // Load notifications
+            db.ref('admin/notifications').on('value', (snapshot) => {
+                const notifications = snapshot.val() || {};
+                updateNotifications(notifications);
+            });
+
+            // Setup search
+            setupSearch('restaurantSearch', 'restaurantsTable', [0, 1, 2]);
+            setupSearch('deliverySearch', 'deliveryTable', [0, 1, 2, 3]);
+            setupSearch('customerSearch', 'customersTable', [0, 1, 2]);
+            setupSearch('orderSearch', 'ordersTable', [0, 1, 2]);
+        }
+
+        function updateStats() {
+            const orders = Object.values(allData.orders);
+            const restaurants = Object.values(allData.restaurants);
+            const deliveryPartners = Object.values(allData.deliveryPartners);
+            const customers = Object.values(allData.customers);
+
+            // Total orders
+            document.getElementById('totalOrders').textContent = orders.length;
+
+            // Approved restaurants
+            const approvedRestaurants = restaurants.filter(r => r.approved).length;
+            document.getElementById('totalRestaurants').textContent = approvedRestaurants;
+
+            // Approved delivery partners
+            const approvedDelivery = deliveryPartners.filter(p => p.approved).length;
+            document.getElementById('totalDelivery').textContent = approvedDelivery;
+
+            // Total customers
+            document.getElementById('totalCustomers').textContent = customers.length;
+
+            // Total revenue
+            const revenue = orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+            document.getElementById('totalRevenue').textContent = formatCurrency(revenue);
+
+            // Pending approvals
+            const pendingRestaurants = restaurants.filter(r => !r.approved).length;
+            const pendingDelivery = deliveryPartners.filter(p => !p.approved).length;
+            document.getElementById('pendingApprovals').textContent = pendingRestaurants + pendingDelivery;
+        }
+
+        function updateRestaurantsTable() {
             const tbody = document.querySelector('#restaurantsTable tbody');
             tbody.innerHTML = '';
             
-            Object.entries(restaurants).forEach(([uid, restaurant]) => {
+            Object.entries(allData.restaurants).forEach(([uid, restaurant]) => {
                 const tr = document.createElement('tr');
                 const status = restaurant.approved ? 'approved' : 'pending';
                 tr.innerHTML = `
-                    <td>${restaurant.name || 'N/A'}</td>
+                    <td><strong>${restaurant.name || 'N/A'}</strong></td>
                     <td>${restaurant.email || 'N/A'}</td>
                     <td>${restaurant.cuisine || 'N/A'}</td>
+                    <td>${restaurant.contact || 'N/A'}</td>
                     <td><span class="badge ${status}">${status.toUpperCase()}</span></td>
                     <td>
                         ${!restaurant.approved ? `
-                            <button class="action-btn approve-btn" onclick="approveRestaurant('${uid}')">Approve</button>
-                            <button class="action-btn reject-btn" onclick="rejectRestaurant('${uid}')">Reject</button>
-                        ` : '<span style="color: #28a745;">✓ Approved</span>'}
+                            <button class="action-btn approve-btn" onclick="approveRestaurant('${uid}')">✓ Approve</button>
+                            <button class="action-btn reject-btn" onclick="rejectRestaurant('${uid}')">✗ Reject</button>
+                        ` : '<span style="color: var(--success-color);">✓ Approved</span>'}
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function loadDeliveryPartners(partners) {
+        function updateDeliveryTable() {
             const tbody = document.querySelector('#deliveryTable tbody');
             tbody.innerHTML = '';
             
-            Object.entries(partners).forEach(([uid, partner]) => {
+            Object.entries(allData.deliveryPartners).forEach(([uid, partner]) => {
                 const tr = document.createElement('tr');
                 const status = partner.approved ? 'approved' : 'pending';
                 tr.innerHTML = `
-                    <td>${partner.name || 'N/A'}</td>
+                    <td><strong>${partner.name || 'N/A'}</strong></td>
                     <td>${partner.email || 'N/A'}</td>
                     <td>${partner.phone || 'N/A'}</td>
                     <td>${partner.vehicle || 'N/A'}</td>
                     <td><span class="badge ${status}">${status.toUpperCase()}</span></td>
                     <td>
                         ${!partner.approved ? `
-                            <button class="action-btn approve-btn" onclick="approveDelivery('${uid}')">Approve</button>
-                            <button class="action-btn reject-btn" onclick="rejectDelivery('${uid}')">Reject</button>
-                        ` : '<span style="color: #28a745;">✓ Approved</span>'}
+                            <button class="action-btn approve-btn" onclick="approveDelivery('${uid}')">✓ Approve</button>
+                            <button class="action-btn reject-btn" onclick="rejectDelivery('${uid}')">✗ Reject</button>
+                        ` : '<span style="color: var(--success-color);">✓ Approved</span>'}
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function loadCustomers(customers) {
+        function updateCustomersTable() {
             const tbody = document.querySelector('#customersTable tbody');
             tbody.innerHTML = '';
             
-            Object.entries(customers).forEach(([uid, customer]) => {
+            Object.entries(allData.customers).forEach(([uid, customer]) => {
+                const orderCount = Object.values(allData.orders).filter(order => 
+                    order.customerId === uid
+                ).length;
+                
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${customer.name || 'N/A'}</td>
+                    <td><strong>${customer.name || 'N/A'}</strong></td>
                     <td>${customer.email || 'N/A'}</td>
                     <td>${customer.phone || 'N/A'}</td>
-                    <td>${customer.address || 'N/A'}</td>
+                    <td>${(customer.address || 'N/A').substring(0, 30)}...</td>
+                    <td><span class="badge">${orderCount} orders</span></td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        function loadOrders(orders) {
+        function updateOrdersTable() {
             const tbody = document.querySelector('#ordersTable tbody');
             tbody.innerHTML = '';
             
-            Object.entries(orders).forEach(([orderId, order]) => {
+            Object.entries(allData.orders).forEach(([orderId, order]) => {
                 const tr = document.createElement('tr');
+                const status = (order.status || 'placed').toLowerCase();
                 tr.innerHTML = `
-                    <td>${orderId.substr(0, 8)}...</td>
+                    <td><strong>#${orderId.substr(-6)}</strong></td>
                     <td>${order.customerName || 'N/A'}</td>
                     <td>${order.restaurantName || 'N/A'}</td>
-                    <td>₹${order.totalAmount || 0}</td>
-                    <td><span class="badge pending">${order.status || 'PLACED'}</span></td>
+                    <td>${formatCurrency(order.totalAmount || 0)}</td>
+                    <td><span class="badge ${status}">${status.toUpperCase()}</span></td>
+                    <td>${formatDate(order.createdAt)}</td>
                     <td>
-                        ${order.status !== 'CANCELLED' && order.status !== 'DELIVERED' ? 
-                            `<button class="action-btn cancel-btn" onclick="cancelOrder('${orderId}')">Cancel</button>` : 
+                        ${status !== 'cancelled' && status !== 'delivered' ? 
+                            `<button class="action-btn cancel-btn" onclick="cancelOrder('${orderId}')">✗ Cancel</button>` : 
                             '-'}
                     </td>
                 `;
@@ -781,32 +1213,43 @@
             });
         }
 
-        function loadNotifications(notifications) {
+        function updateNotifications(notifications) {
             const list = document.getElementById('notificationsList');
             list.innerHTML = '';
             
-            Object.entries(notifications).reverse().slice(0, 10).forEach(([id, notif]) => {
+            const sorted = Object.entries(notifications)
+                .sort(([,a], [,b]) => b.createdAt - a.createdAt)
+                .slice(0, 10);
+            
+            if (sorted.length === 0) {
+                list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🔔</div><p>No notifications sent yet</p></div>';
+                return;
+            }
+            
+            sorted.forEach(([id, notif]) => {
                 const div = document.createElement('div');
                 div.className = 'notification-item';
-                const date = new Date(notif.createdAt).toLocaleString();
                 div.innerHTML = `
                     <strong>${notif.message}</strong>
-                    <div style="font-size: 12px; color: #666; margin-top: 5px;">${date}</div>
+                    <div style="font-size: 12px; color: var(--text-light); margin-top: 5px;">
+                        ${formatDate(notif.createdAt)}
+                    </div>
                 `;
                 list.appendChild(div);
             });
         }
 
-        function loadReports(orders) {
+        function updateReports() {
             const restaurantStats = {};
             
-            Object.entries(orders).forEach(([, order]) => {
+            Object.entries(allData.orders).forEach(([, order]) => {
                 const rid = order.restaurantId;
                 if (!restaurantStats[rid]) {
                     restaurantStats[rid] = {
-                        name: order.restaurantName || 'Unknown',
+                        name: order.restaurantName || 'Unknown Restaurant',
                         orders: 0,
-                        revenue: 0
+                        revenue: 0,
+                        rating: 4.5 // This would come from ratings in a real app
                     };
                 }
                 restaurantStats[rid].orders++;
@@ -820,65 +1263,155 @@
             const tbody = document.querySelector('#topRestaurantsTable tbody');
             tbody.innerHTML = '';
             
-            sorted.forEach(([, stats]) => {
+            sorted.forEach(([, stats], index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
+                    <td><strong>#${index + 1}</strong></td>
                     <td>${stats.name}</td>
                     <td>${stats.orders}</td>
-                    <td>₹${stats.revenue.toFixed(2)}</td>
+                    <td>${formatCurrency(stats.revenue)}</td>
+                    <td>⭐ ${stats.rating}/5</td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            const totalRevenue = Object.values(orders).reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+            const totalRevenue = Object.values(allData.orders).reduce((sum, order) => sum + (order.totalAmount || 0), 0);
+            const totalOrders = Object.keys(allData.orders).length;
+            const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
             document.getElementById('codSummary').innerHTML = `
-                <div style="font-size: 18px; color: #333; margin-bottom: 10px;">
-                    <strong>Total COD Collections:</strong> ₹${totalRevenue.toFixed(2)}
-                </div>
-                <div style="font-size: 14px; color: #666;">
-                    From ${Object.keys(orders).length} orders
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="text-align: center; padding: 20px; background: var(--light-color); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--primary-color);">
+                            ${formatCurrency(totalRevenue)}
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-light);">Total COD Collections</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: var(--light-color); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--success-color);">
+                            ${totalOrders}
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-light);">Total Orders</div>
+                    </div>
+                    <div style="text-align: center; padding: 20px; background: var(--light-color); border-radius: 8px;">
+                        <div style="font-size: 24px; font-weight: 700; color: var(--warning-color);">
+                            ${formatCurrency(avgOrderValue)}
+                        </div>
+                        <div style="font-size: 14px; color: var(--text-light);">Average Order Value</div>
+                    </div>
                 </div>
             `;
         }
 
+        // Action functions
         window.approveRestaurant = async (uid) => {
-            await update(ref(db, `restaurants/${uid}`), { approved: true });
+            if (confirm('Are you sure you want to approve this restaurant?')) {
+                try {
+                    await db.ref(`restaurants/${uid}`).update({ approved: true });
+                    showMessage('successMessage', 'Restaurant approved successfully!', 'success');
+                } catch (error) {
+                    showMessage('errorMessage', 'Error approving restaurant: ' + error.message, 'error');
+                }
+            }
         };
 
         window.rejectRestaurant = async (uid) => {
-            await update(ref(db, `restaurants/${uid}`), { approved: false });
+            if (confirm('Are you sure you want to reject this restaurant?')) {
+                try {
+                    await db.ref(`restaurants/${uid}`).update({ approved: false });
+                    showMessage('successMessage', 'Restaurant rejected successfully!', 'success');
+                } catch (error) {
+                    showMessage('errorMessage', 'Error rejecting restaurant: ' + error.message, 'error');
+                }
+            }
         };
 
         window.approveDelivery = async (uid) => {
-            await update(ref(db, `deliveryPartners/${uid}`), { approved: true });
+            if (confirm('Are you sure you want to approve this delivery partner?')) {
+                try {
+                    await db.ref(`deliveryPartners/${uid}`).update({ approved: true });
+                    showMessage('successMessage', 'Delivery partner approved successfully!', 'success');
+                } catch (error) {
+                    showMessage('errorMessage', 'Error approving delivery partner: ' + error.message, 'error');
+                }
+            }
         };
 
         window.rejectDelivery = async (uid) => {
-            await update(ref(db, `deliveryPartners/${uid}`), { approved: false });
+            if (confirm('Are you sure you want to reject this delivery partner?')) {
+                try {
+                    await db.ref(`deliveryPartners/${uid}`).update({ approved: false });
+                    showMessage('successMessage', 'Delivery partner rejected successfully!', 'success');
+                } catch (error) {
+                    showMessage('errorMessage', 'Error rejecting delivery partner: ' + error.message, 'error');
+                }
+            }
         };
 
         window.cancelOrder = async (orderId) => {
             if (confirm('Are you sure you want to cancel this order?')) {
-                await update(ref(db, `orders/${orderId}`), { 
-                    status: 'CANCELLED',
-                    updatedAt: Date.now()
-                });
+                try {
+                    await db.ref(`orders/${orderId}`).update({ 
+                        status: 'CANCELLED',
+                        updatedAt: Date.now()
+                    });
+                    showMessage('successMessage', 'Order cancelled successfully!', 'success');
+                } catch (error) {
+                    showMessage('errorMessage', 'Error cancelling order: ' + error.message, 'error');
+                }
             }
         };
 
         window.sendNotification = async () => {
             const message = document.getElementById('notificationMessage').value.trim();
-            if (!message) return alert('Please enter a message');
+            if (!message) {
+                showMessage('errorMessage', 'Please enter a notification message', 'error');
+                return;
+            }
             
-            const notifRef = push(ref(db, 'admin/notifications'));
-            await set(notifRef, {
-                message: message,
-                createdAt: Date.now()
-            });
-            
-            document.getElementById('notificationMessage').value = '';
-            alert('Notification sent successfully!');
+            try {
+                const notifRef = db.ref('admin/notifications').push();
+                await notifRef.set({
+                    message: message,
+                    createdAt: Date.now(),
+                    sentBy: currentUser?.email || 'Admin'
+                });
+                
+                document.getElementById('notificationMessage').value = '';
+                showMessage('successMessage', 'Notification sent successfully to all users!', 'success');
+            } catch (error) {
+                showMessage('errorMessage', 'Error sending notification: ' + error.message, 'error');
+            }
         };
+
+        // Auth state listener
+        auth.onAuthStateChanged((user) => {
+            currentUser = user;
+            if (!user) {
+                document.getElementById('loginContainer').style.display = 'flex';
+                document.getElementById('dashboard').classList.remove('active');
+            }
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menuToggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('mobile-visible') &&
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('mobile-visible');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.getElementById('sidebar').classList.remove('mobile-visible');
+            }
+        });
     </script>
 </body>
 </html>
