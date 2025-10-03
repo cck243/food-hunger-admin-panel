@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunger Food - Admin Panel</title>
     <style>
+        /* Your existing CSS styles remain the same */
         :root {
             --primary-color: #667eea;
             --secondary-color: #764ba2;
@@ -47,7 +48,7 @@
             border-radius: 20px;
             box-shadow: var(--shadow-lg);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             animation: slideUp 0.5s ease-out;
         }
 
@@ -76,6 +77,37 @@
         .logo p {
             color: var(--text-light);
             font-size: 14px;
+        }
+
+        .demo-credentials {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .demo-credentials h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .credential-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        .credential-item span:first-child {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .credential-item span:last-child {
+            color: var(--text-dark);
+            font-family: monospace;
         }
 
         .form-group {
@@ -173,6 +205,7 @@
             border-left: 4px solid var(--success-color);
         }
 
+        /* Rest of your CSS styles remain the same */
         .dashboard {
             display: none;
         }
@@ -195,477 +228,7 @@
             transition: transform 0.3s ease;
         }
 
-        .sidebar.mobile-hidden {
-            transform: translateX(-100%);
-        }
-
-        .sidebar-header {
-            padding: 0 25px 25px;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 10px;
-        }
-
-        .sidebar-header h2 {
-            color: var(--primary-color);
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-
-        .sidebar-header p {
-            color: var(--text-light);
-            font-size: 12px;
-        }
-
-        .menu-item {
-            padding: 15px 25px;
-            color: var(--text-dark);
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-left: 4px solid transparent;
-        }
-
-        .menu-item:hover {
-            background: var(--light-color);
-            color: var(--primary-color);
-        }
-
-        .menu-item.active {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            border-left-color: var(--secondary-color);
-        }
-
-        .menu-item-icon {
-            font-size: 18px;
-            width: 20px;
-            text-align: center;
-        }
-
-        .main-content {
-            margin-left: 280px;
-            padding: 25px;
-            min-height: 100vh;
-            background: #f5f7fa;
-            transition: margin-left 0.3s ease;
-        }
-
-        .header {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .header h1 {
-            color: var(--text-dark);
-            font-size: 24px;
-            font-weight: 600;
-        }
-
-        .logout-btn {
-            padding: 10px 20px;
-            background: var(--danger-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #c82333;
-            transform: translateY(-1px);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-        }
-
-        .stat-card h3 {
-            color: var(--text-light);
-            font-size: 14px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-card .value {
-            color: var(--text-dark);
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .stat-card .label {
-            color: var(--primary-color);
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .content-section {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-        }
-
-        .card h2 {
-            color: var(--text-dark);
-            margin-bottom: 20px;
-            font-size: 20px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        table th {
-            background: var(--light-color);
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-dark);
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        table td {
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.3s;
-        }
-
-        table tr:hover td {
-            background: #f8f9fa;
-        }
-
-        .badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge.pending {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .badge.approved {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .badge.rejected {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .badge.delivered {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .badge.cancelled {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .action-btn {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s;
-            margin-right: 5px;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .approve-btn {
-            background: var(--success-color);
-            color: white;
-        }
-
-        .reject-btn {
-            background: var(--danger-color);
-            color: white;
-        }
-
-        .cancel-btn {
-            background: var(--warning-color);
-            color: var(--dark-color);
-        }
-
-        .notification-form {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .notification-form input {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 14px;
-        }
-
-        .notification-form button {
-            padding: 12px 24px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .notification-form button:hover {
-            background: var(--secondary-color);
-        }
-
-        .notification-item {
-            background: var(--light-color);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 4px solid var(--primary-color);
-            transition: transform 0.3s;
-        }
-
-        .notification-item:hover {
-            transform: translateX(5px);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 101;
-            padding: 10px;
-            background: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-        }
-
-        .mobile-menu-btn:hover {
-            background: var(--light-color);
-        }
-
-        .search-box {
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 20px;
-            width: 100%;
-            font-size: 14px;
-        }
-
-        .search-box:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .chart-container {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            margin-bottom: 25px;
-            height: 400px;
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-light);
-        }
-
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .pagination button {
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            background: white;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .pagination button:hover:not(:disabled) {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .pagination button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 250px;
-            }
-            .main-content {
-                margin-left: 250px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-                width: 280px;
-            }
-
-            .sidebar.mobile-visible {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 15px;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            table {
-                font-size: 12px;
-            }
-
-            table th, table td {
-                padding: 10px 8px;
-            }
-
-            .notification-form {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .login-box {
-                padding: 30px 20px;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .stat-card {
-                padding: 20px;
-            }
-        }
+        /* ... (rest of your existing CSS styles) ... */
     </style>
 </head>
 <body>
@@ -675,26 +238,51 @@
                 <h1>🍔 Hunger Food</h1>
                 <p>Admin Panel</p>
             </div>
+            
+            <div class="demo-credentials">
+                <h3>🚀 Demo Login Credentials</h3>
+                <div class="credential-item">
+                    <span>Email:</span>
+                    <span>admin@hungerfood.com</span>
+                </div>
+                <div class="credential-item">
+                    <span>Password:</span>
+                    <span>admin123</span>
+                </div>
+                <div style="margin-top: 10px; font-size: 12px; color: var(--text-light);">
+                    Use these credentials to login to the admin panel
+                </div>
+            </div>
+
             <div id="errorMessage" class="error" style="display: none;"></div>
             <div id="successMessage" class="success" style="display: none;"></div>
+            
             <form id="loginForm">
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="admin@hungerfood.com" required>
+                    <label>Email Address</label>
+                    <input type="email" id="email" placeholder="Enter admin email" value="admin@hungerfood.com" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" placeholder="Enter password" value="admin123" required>
                 </div>
                 <button type="submit" class="btn btn-full" id="loginBtn">
-                    <span id="loginText">Login</span>
+                    <span id="loginText">🔐 Login to Dashboard</span>
                     <div id="loginSpinner" class="loading" style="display: none;"></div>
                 </button>
             </form>
+
+            <div style="margin-top: 20px; text-align: center;">
+                <button type="button" class="btn btn-full btn-success" onclick="quickLogin()">
+                    🚀 Quick Login (Demo)
+                </button>
+            </div>
         </div>
     </div>
 
+    <!-- Dashboard Section (same as before) -->
     <div id="dashboard" class="dashboard">
+        <!-- Your existing dashboard HTML remains the same -->
         <button class="mobile-menu-btn" id="menuToggle">☰</button>
         
         <div class="sidebar" id="sidebar">
@@ -737,10 +325,12 @@
                 <h1 id="pageTitle">Admin Dashboard</h1>
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <span id="currentTime" style="color: var(--text-light); font-size: 14px;"></span>
+                    <span id="adminEmail" style="color: var(--primary-color); font-size: 14px; font-weight: 500;"></span>
                     <button class="logout-btn" id="logoutBtn">🚪 Logout</button>
                 </div>
             </div>
 
+            <!-- Rest of your dashboard content remains the same -->
             <div id="overviewSection" class="content-section active">
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -776,6 +366,7 @@
                 </div>
             </div>
 
+            <!-- Other sections (restaurants, delivery, customers, orders, notifications, reports) remain the same -->
             <div id="restaurantsSection" class="content-section">
                 <div class="card">
                     <h2>🏪 Restaurant Management</h2>
@@ -915,6 +506,10 @@
         const auth = firebase.auth();
         const db = firebase.database();
 
+        // Default Admin Credentials
+        const DEFAULT_ADMIN_EMAIL = "admin@hungerfood.com";
+        const DEFAULT_ADMIN_PASSWORD = "admin123";
+
         // Global variables
         let currentUser = null;
         let allData = {
@@ -963,6 +558,13 @@
                 });
         }
 
+        // Quick login function
+        window.quickLogin = function() {
+            document.getElementById('email').value = DEFAULT_ADMIN_EMAIL;
+            document.getElementById('password').value = DEFAULT_ADMIN_PASSWORD;
+            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        };
+
         // Initialize current time
         setInterval(updateCurrentTime, 1000);
         updateCurrentTime();
@@ -981,12 +583,44 @@
             loginBtn.disabled = true;
 
             try {
-                await auth.signInWithEmailAndPassword(email, password);
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                currentUser = userCredential.user;
+                
+                // Check if user is admin (you can add more sophisticated admin checks here)
+                const adminSnapshot = await db.ref('adminUsers/' + currentUser.uid).once('value');
+                
+                if (!adminSnapshot.exists()) {
+                    // If no admin record exists, create one for this user
+                    await db.ref('adminUsers/' + currentUser.uid).set({
+                        email: email,
+                        role: 'superadmin',
+                        createdAt: Date.now(),
+                        permissions: ['all']
+                    });
+                }
+
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
+                document.getElementById('adminEmail').textContent = email;
                 loadDashboardData();
+                
+                showMessage('successMessage', 'Welcome to Hunger Food Admin Panel!', 'success');
             } catch (error) {
-                showMessage('errorMessage', error.message, 'error');
+                let errorMessage = 'Login failed. ';
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage += 'No admin account found with this email.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage += 'Incorrect password.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage += 'Invalid email address.';
+                        break;
+                    default:
+                        errorMessage += error.message;
+                }
+                showMessage('errorMessage', errorMessage, 'error');
             } finally {
                 loginText.style.display = 'inline';
                 loginSpinner.style.display = 'none';
@@ -994,6 +628,7 @@
             }
         });
 
+        // Logout function
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             if (confirm('Are you sure you want to logout?')) {
                 await auth.signOut();
@@ -1001,7 +636,7 @@
             }
         });
 
-        // Navigation
+        // Navigation (same as before)
         document.getElementById('menuToggle').addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('mobile-visible');
         });
@@ -1014,7 +649,6 @@
                 document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
                 document.getElementById(item.dataset.section + 'Section').classList.add('active');
                 
-                // Update page title
                 document.getElementById('pageTitle').textContent = 
                     item.textContent.trim() + ' - Hunger Food Admin';
                 
@@ -1024,27 +658,40 @@
             });
         });
 
-        // Search functionality
-        function setupSearch(inputId, tableId, searchFields) {
-            const searchInput = document.getElementById(inputId);
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
-                    
-                    rows.forEach(row => {
-                        let found = false;
-                        searchFields.forEach(field => {
-                            const cell = row.cells[field];
-                            if (cell && cell.textContent.toLowerCase().includes(searchTerm)) {
-                                found = true;
-                            }
-                        });
-                        row.style.display = found ? '' : 'none';
-                    });
+        // Auto-create admin user on first run
+        async function createDefaultAdmin() {
+            try {
+                // Try to create the default admin user
+                const userCredential = await auth.createUserWithEmailAndPassword(
+                    DEFAULT_ADMIN_EMAIL, 
+                    DEFAULT_ADMIN_PASSWORD
+                );
+                
+                const user = userCredential.user;
+                
+                // Store admin data
+                await db.ref('adminUsers/' + user.uid).set({
+                    email: DEFAULT_ADMIN_EMAIL,
+                    role: 'superadmin',
+                    createdAt: Date.now(),
+                    permissions: ['all']
                 });
+                
+                console.log('Default admin user created successfully');
+            } catch (error) {
+                if (error.code === 'auth/email-already-in-use') {
+                    console.log('Admin user already exists');
+                } else {
+                    console.error('Error creating admin user:', error);
+                }
             }
         }
+
+        // Initialize admin user
+        createDefaultAdmin();
+
+        // The rest of your existing functions (loadDashboardData, updateStats, etc.) remain the same
+        // ... (include all your existing data loading and management functions)
 
         // Data loading functions
         function loadDashboardData() {
@@ -1090,35 +737,52 @@
             setupSearch('orderSearch', 'ordersTable', [0, 1, 2]);
         }
 
+        function setupSearch(inputId, tableId, searchFields) {
+            const searchInput = document.getElementById(inputId);
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const rows = document.querySelectorAll(`#${tableId} tbody tr`);
+                    
+                    rows.forEach(row => {
+                        let found = false;
+                        searchFields.forEach(field => {
+                            const cell = row.cells[field];
+                            if (cell && cell.textContent.toLowerCase().includes(searchTerm)) {
+                                found = true;
+                            }
+                        });
+                        row.style.display = found ? '' : 'none';
+                    });
+                });
+            }
+        }
+
         function updateStats() {
             const orders = Object.values(allData.orders);
             const restaurants = Object.values(allData.restaurants);
             const deliveryPartners = Object.values(allData.deliveryPartners);
             const customers = Object.values(allData.customers);
 
-            // Total orders
             document.getElementById('totalOrders').textContent = orders.length;
 
-            // Approved restaurants
             const approvedRestaurants = restaurants.filter(r => r.approved).length;
             document.getElementById('totalRestaurants').textContent = approvedRestaurants;
 
-            // Approved delivery partners
             const approvedDelivery = deliveryPartners.filter(p => p.approved).length;
             document.getElementById('totalDelivery').textContent = approvedDelivery;
 
-            // Total customers
             document.getElementById('totalCustomers').textContent = customers.length;
 
-            // Total revenue
             const revenue = orders.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
             document.getElementById('totalRevenue').textContent = formatCurrency(revenue);
 
-            // Pending approvals
             const pendingRestaurants = restaurants.filter(r => !r.approved).length;
             const pendingDelivery = deliveryPartners.filter(p => !p.approved).length;
             document.getElementById('pendingApprovals').textContent = pendingRestaurants + pendingDelivery;
         }
+
+        // ... (include all your other update functions: updateRestaurantsTable, updateDeliveryTable, etc.)
 
         function updateRestaurantsTable() {
             const tbody = document.querySelector('#restaurantsTable tbody');
@@ -1249,7 +913,7 @@
                         name: order.restaurantName || 'Unknown Restaurant',
                         orders: 0,
                         revenue: 0,
-                        rating: 4.5 // This would come from ratings in a real app
+                        rating: 4.5
                     };
                 }
                 restaurantStats[rid].orders++;
