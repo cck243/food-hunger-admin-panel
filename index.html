@@ -50,27 +50,6 @@
             font-size: 14px;
         }
 
-        .demo-credentials {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border-left: 4px solid #667eea;
-        }
-
-        .demo-credentials h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .credential-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 13px;
-        }
-
         .form-group {
             margin-bottom: 20px;
         }
@@ -442,25 +421,13 @@
                 <p>Admin Panel</p>
             </div>
 
-            <div class="demo-credentials">
-                <h3>Demo Login Credentials</h3>
-                <div class="credential-item">
-                    <span>Email:</span>
-                    <span>admin@hungerfood.com</span>
-                </div>
-                <div class="credential-item">
-                    <span>Password:</span>
-                    <span>admin123</span>
-                </div>
-            </div>
-
             <div id="errorMessage" class="error" style="display: none;"></div>
             <div id="successMessage" class="success" style="display: none;"></div>
 
             <form id="loginForm">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="email" placeholder="admin@hungerfood.com" required>
+                    <input type="email" id="email" placeholder="Enter admin email" required>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -468,12 +435,6 @@
                 </div>
                 <button type="submit" class="btn" id="loginBtn">Login</button>
             </form>
-
-            <div style="margin-top: 15px; text-align: center;">
-                <button type="button" class="btn" onclick="quickLogin()" style="background: #28a745;">
-                    Quick Login (Use Demo Credentials)
-                </button>
-            </div>
         </div>
     </div>
 
@@ -660,10 +621,6 @@
         const auth = firebase.auth();
         const db = firebase.database();
 
-        // Default Admin Credentials
-        const ADMIN_EMAIL = "admin@hungerfood.com";
-        const ADMIN_PASSWORD = "admin123";
-
         // Utility functions
         function showMessage(elementId, message, type = 'error') {
             const element = document.getElementById(elementId);
@@ -674,13 +631,6 @@
                 element.style.display = 'none';
             }, 5000);
         }
-
-        // Quick login function
-        window.quickLogin = function() {
-            document.getElementById('email').value = ADMIN_EMAIL;
-            document.getElementById('password').value = ADMIN_PASSWORD;
-            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
-        };
 
         // Authentication
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -695,17 +645,6 @@
             loginBtn.textContent = 'Logging in...';
 
             try {
-                // First, try to create the admin user if it doesn't exist
-                try {
-                    await auth.createUserWithEmailAndPassword(ADMIN_EMAIL, ADMIN_PASSWORD);
-                } catch (createError) {
-                    // User likely already exists, which is fine
-                    if (createError.code !== 'auth/email-already-in-use') {
-                        console.log('Admin user creation attempt:', createError.message);
-                    }
-                }
-
-                // Now try to login
                 await auth.signInWithEmailAndPassword(email, password);
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
